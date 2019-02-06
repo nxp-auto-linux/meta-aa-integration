@@ -1,0 +1,52 @@
+Yocto layer for integrating Adaptive Autosar R18-10 in NXP Auto Linux BSP
+=========================================================================
+
+Adaptive Autosar R18-10 Platform Demonstrator
+---------------------------------------------
+
+The AUTOSAR Adaptive Platform (AP) is the standardized platform for microprocessor-based ECUs
+supporting use cases like highly automated and autonomous driving as well as high speed on-board
+and off-board communication.
+
+Yocto integration layer within Linux BSP
+----------------------------------------
+
+Meta-aa-integration layer requires Auto Yocto BSP release and Adaptive Autosar R18-10.
+Steps required for an OpenEmbedded/Yocto BSP build are also mandatory.
+Sections below expose the additional steps for building Adaptive Autosar
+integration.
+
+Adding Adaptive Autosar R18-10 into a Yocto distribution using meta-aa-integration
+----------------------------------------------------------------------------------
+
+Prerequisites: an existing Yocto distribution should be available.
+ - Get the meta-aa-integration repository and place it under "sources" directory of
+Auto Yocto BSP yocto distribution.
+ - Add the path to meta-aa-integration layer into 'bblayers.conf' file, manually or
+using the following command:  
+  $ bitbake-layers add-layer ../sources/meta-aa-integration    
+  
+ - Get the Adaptive Autosar R18-10 official source code and yocto layers:
+   * ara-api : source code for Adaptive Autosar Platform Demonstrator
+   * sample-applications : source code for Adaptive Autosar sample applications
+   * yocto-layers : meta-ara and meta-st Adaptive Autosar yocto layers
+ - Place them under "sources" directory of Auto Yocto BSP yocto distribution.
+ - Add the path to yocto-layers/meta-ara and yocto-layers/meta-st layer into 'bblayers.conf' file,
+manually or using the following commands:  
+  $ bitbake-layers add-layer ../sources/yocto-layers/meta-ara  
+  $ bitbake-layers add-layer ../sources/yocto-layers/meta-st  
+
+ External location: https://www.autosar.org/standards/adaptive-platform/  
+ NOTE: An Adaptive Autosar license must be obtained in order to download the official Adaptive Autosar R18-10 source code.  
+
+Build Adaptive Autosar Images
+-----------------------------
+
+You can build the following Adaptive Autosar images, using:  
+$ bitbake <image_name>  
+where <image_name> is one of the following:
+- core-image-apd-minimal
+- core-image-apd-minimal-radar
+- core-image-apd-minimal-fusion
+- core-image-apd-minimal-radar-fusion
+- core-image-apd-ecu1-scenario2
