@@ -38,7 +38,7 @@ BOOST_LIBS_remove_class-native = " context coroutine"
 BOOST_LIBS_remove_mips16e = "wave"
 
 # optional libraries
-PACKAGECONFIG ??= "locale python"
+PACKAGECONFIG ??= "locale"
 PACKAGECONFIG[locale] = ",,icu"
 PACKAGECONFIG[graph_parallel] = ",,,boost-mpi mpich"
 PACKAGECONFIG[mpi] = ",,mpich"
