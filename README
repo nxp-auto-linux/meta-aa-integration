@@ -36,6 +36,19 @@ manually or using the following commands:
   $ bitbake-layers add-layer ../sources/yocto-layers/meta-ara  
   $ bitbake-layers add-layer ../sources/yocto-layers/meta-st  
 
+ - Make the following additions:
+   * in yocto-layers/meta-ara/conf/layer.conf :
+
+     `- LAYERSERIES_COMPAT_apd = "sumo thud"` 
+
+     `+ LAYERSERIES_COMPAT_apd = "sumo thud zeus"` 
+
+   * in yocto-layers/meta-st/conf/layer.conf :
+
+     `- LAYERSERIES_COMPAT_st = "sumo thud"` 
+
+     `+ LAYERSERIES_COMPAT_st = "sumo thud zeus"`
+
  External location: https://www.autosar.org/standards/adaptive-platform/  
  NOTE: An Adaptive Autosar license must be obtained in order to download the official Adaptive Autosar R19-11 source code.  
 
