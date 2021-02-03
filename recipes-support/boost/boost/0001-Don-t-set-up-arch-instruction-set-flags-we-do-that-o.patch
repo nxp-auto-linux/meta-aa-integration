@@ -1,20 +1,21 @@
-From 7c49525812567f1219706c4ed330b3bd2cc8e94a Mon Sep 17 00:00:00 2001
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Tue, 13 Dec 2016 10:29:32 -0700
-Subject: [PATCH 3/3] Don't set up arch/instruction-set flags, we do that
- ourselves
+From f4d3fad43d67808d71325ba0df1457555b9a0086 Mon Sep 17 00:00:00 2001
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Tue, 18 Dec 2018 15:42:57 +0100
+Subject: [PATCH] Don't set up arch/instruction-set flags, we do that ourselves
 
 Upstream-Status: Inappropriate
 Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+
 ---
- tools/build/src/tools/gcc.jam | 121 ------------------------------------------
- 1 file changed, 121 deletions(-)
+ tools/build/src/tools/gcc.jam | 132 ----------------------------------
+ 1 file changed, 132 deletions(-)
 
 diff --git a/tools/build/src/tools/gcc.jam b/tools/build/src/tools/gcc.jam
-index 942f141..d062c20 100644
+index b9bb9cf2a..c7e3cf3fe 100644
 --- a/tools/build/src/tools/gcc.jam
 +++ b/tools/build/src/tools/gcc.jam
-@@ -1068,124 +1068,3 @@ local rule cpu-flags ( toolset variable : architecture : instruction-set + :
+@@ -1180,135 +1180,3 @@ local rule cpu-flags ( toolset variable : architecture : instruction-set + :
          <architecture>$(architecture)/<instruction-set>$(instruction-set)
          : $(values) ;
  }
@@ -60,6 +61,11 @@ index 942f141..d062c20 100644
 -cpu-flags gcc OPTIONS : x86 : core-avx-i : -march=core-avx-i ;
 -cpu-flags gcc OPTIONS : x86 : ivy-bridge : -march=core-avx-i ;
 -cpu-flags gcc OPTIONS : x86 : haswell : -march=core-avx-i -mavx2 -mfma -mbmi -mbmi2 -mlzcnt ;
+-cpu-flags gcc OPTIONS : x86 : broadwell : -march=broadwell ;
+-cpu-flags gcc OPTIONS : x86 : skylake : -march=skylake ;
+-cpu-flags gcc OPTIONS : x86 : skylake-avx512 : -march=skylake-avx512 ;
+-cpu-flags gcc OPTIONS : x86 : cannonlake : -march=skylake-avx512 -mavx512vbmi -mavx512ifma -msha ;
+-cpu-flags gcc OPTIONS : x86 : icelake : -march=icelake ;
 -cpu-flags gcc OPTIONS : x86 : k6 : -march=k6 ;
 -cpu-flags gcc OPTIONS : x86 : k6-2 : -march=k6-2 ;
 -cpu-flags gcc OPTIONS : x86 : k6-3 : -march=k6-3 ;
@@ -81,8 +87,10 @@ index 942f141..d062c20 100644
 -cpu-flags gcc OPTIONS : x86 : bdver1 : -march=bdver1 ;
 -cpu-flags gcc OPTIONS : x86 : bdver2 : -march=bdver2 ;
 -cpu-flags gcc OPTIONS : x86 : bdver3 : -march=bdver3 ;
+-cpu-flags gcc OPTIONS : x86 : bdver4 : -march=bdver4 ;
 -cpu-flags gcc OPTIONS : x86 : btver1 : -march=btver1 ;
 -cpu-flags gcc OPTIONS : x86 : btver2 : -march=btver2 ;
+-cpu-flags gcc OPTIONS : x86 : znver1 : -march=znver1 ;
 -cpu-flags gcc OPTIONS : x86 : winchip-c6 : -march=winchip-c6 ;
 -cpu-flags gcc OPTIONS : x86 : winchip2 : -march=winchip2 ;
 -cpu-flags gcc OPTIONS : x86 : c3 : -march=c3 ;
@@ -137,7 +145,9 @@ index 942f141..d062c20 100644
 -cpu-flags gcc OPTIONS : power : rios2 : -mcpu=rios2 ;
 -cpu-flags gcc OPTIONS : power : rsc : -mcpu=rsc ;
 -cpu-flags gcc OPTIONS : power : rs64a : -mcpu=rs64 ;
+-cpu-flags gcc OPTIONS : s390x : z196 : -march=z196 ;
+-cpu-flags gcc OPTIONS : s390x : zEC12 : -march=zEC12 ;
+-cpu-flags gcc OPTIONS : s390x : z13 : -march=z13 ;
+-cpu-flags gcc OPTIONS : s390x : z14 : -march=z14 ;
 -# AIX variant of RS/6000 & PowerPC
 -toolset.flags gcc AROPTIONS <address-model>64/<target-os>aix : "-X64" ;
--- 
-2.8.0
