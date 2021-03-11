@@ -1,7 +1,7 @@
-Yocto layer for integrating Adaptive Autosar R19-11 in NXP Auto Linux BSP
+Yocto layer for integrating Adaptive Autosar R20-11 in NXP Auto Linux BSP
 =========================================================================
 
-Adaptive Autosar R19-11 Platform Demonstrator
+Adaptive Autosar R20-11 Platform Demonstrator
 ---------------------------------------------
 
 The AUTOSAR Adaptive Platform (AP) is the standardized platform for microprocessor-based ECUs
@@ -11,12 +11,12 @@ and off-board communication.
 Yocto integration layer within Linux BSP
 ----------------------------------------
 
-Meta-aa-integration layer requires Auto Yocto BSP release and Adaptive Autosar R19-11.
+Meta-aa-integration layer requires Auto Yocto BSP release and Adaptive Autosar R20-11.
 Steps required for an OpenEmbedded/Yocto BSP build are also mandatory.
 Sections below expose the additional steps for building Adaptive Autosar
 integration.
 
-Adding Adaptive Autosar R19-11 into a Yocto distribution using meta-aa-integration
+Adding Adaptive Autosar R20-11 into a Yocto distribution using meta-aa-integration
 ----------------------------------------------------------------------------------
 
 Prerequisites: an existing Yocto distribution should be available.
@@ -26,31 +26,24 @@ Auto Yocto BSP yocto distribution.
 using the following command:  
   $ bitbake-layers add-layer ../sources/meta-aa-integration    
   
- - Get the Adaptive Autosar R19-11 official source code and yocto layers:
+ - Get the Adaptive Autosar R20-11 official source code and yocto layers:
    * ara-api : source code for Adaptive Autosar Platform Demonstrator
    * sample-applications : source code for Adaptive Autosar sample applications
-   * yocto-layers : meta-ara and meta-st Adaptive Autosar yocto layers
+   * yocto-layers : meta-ara Adaptive Autosar yocto layer
  - Place them under "sources" directory of Auto Yocto BSP yocto distribution.
- - Add the path to yocto-layers/meta-ara and yocto-layers/meta-st layer into 'bblayers.conf' file,
-manually or using the following commands:  
+ - Add the path to yocto-layers/meta-ara into 'bblayers.conf' file,
+manually or using the following command:  
   $ bitbake-layers add-layer ../sources/yocto-layers/meta-ara  
-  $ bitbake-layers add-layer ../sources/yocto-layers/meta-st  
 
  - Make the following additions:
    * in yocto-layers/meta-ara/conf/layer.conf :
 
-     `- LAYERSERIES_COMPAT_apd = "sumo thud"` 
+     `- LAYERSERIES_COMPAT_apd = "zeus"` 
 
-     `+ LAYERSERIES_COMPAT_apd = "sumo thud zeus"` 
-
-   * in yocto-layers/meta-st/conf/layer.conf :
-
-     `- LAYERSERIES_COMPAT_st = "sumo thud"` 
-
-     `+ LAYERSERIES_COMPAT_st = "sumo thud zeus"`
+     `+ LAYERSERIES_COMPAT_apd = "zeus gatesgarth"` 
 
  External location: https://www.autosar.org/standards/adaptive-platform/  
- NOTE: An Adaptive Autosar license must be obtained in order to download the official Adaptive Autosar R19-11 source code.  
+ NOTE: An Adaptive Autosar license must be obtained in order to download the official Adaptive Autosar R20-11 source code.  
 
 Build Adaptive Autosar Images
 -----------------------------
